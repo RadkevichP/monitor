@@ -7,6 +7,7 @@ import javax.ejb.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 @Singleton
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
@@ -48,7 +49,6 @@ public class InMemoryStorage implements Storage<String, DevicePingNote> {
             } else {
                 return notes.subList((notesNumber - 1 - lastEntriesNumber), (notesNumber - 1));
             }
-
         } else throw new RuntimeException("Device not found!");
     }
 

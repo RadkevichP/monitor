@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Stateless
 public class InMemoryCacheService implements CacheService<String, DevicePingNote> {
@@ -38,7 +39,10 @@ public class InMemoryCacheService implements CacheService<String, DevicePingNote
     }
 
     @Override
-    public Set<String> getDevices() {
-        return storage.getStoredKeys();
+    public List<String> getDevices() {
+        List<String> keys = storage.getStoredKeys()
+                .stream()
+                .collect(Collectors.toList());
+        return keys;
     }
 }

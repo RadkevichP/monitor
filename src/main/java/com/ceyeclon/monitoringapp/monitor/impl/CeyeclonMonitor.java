@@ -7,18 +7,24 @@ import com.ceyeclon.monitoringapp.service.PollService;
 import generated.ToDevice;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Schedule;
+import javax.annotation.Resource;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Singleton
 @Startup
 public class CeyeclonMonitor implements Monitor {
 
-    static final long INITIAL_DELAY = 5;
-    static final long PERIOD = 3;
+    //TODO: take this value from property file
+    private static final long INITIAL_DELAY = 1;
+    private static final long PERIOD = 3;
+
+    @Resource(lookup = "concurrent/__defaultManagedScheduledExecutorService")
+    private ManagedScheduledExecutorService scheduler;
 
 
     private CacheService<String, DevicePingNote> cacheService;
@@ -36,21 +42,17 @@ public class CeyeclonMonitor implements Monitor {
     @PostConstruct
     public void initialize() {
         System.out.println("Monitor created!");
+        this.scheduler.scheduleAtFixedRate(this::monitorDevices, INITIAL_DELAY, PERIOD, TimeUnit.MINUTES);
     }
 
 
     @Override
-    @Schedule(minute = "*/3",
-            hour = "*",
-            info = "PollingScheduler",
-            persistent = false)
     public void monitorDevices() {
         List<ToDevice> devices = pollService.findPingableDevices();
         for (ToDevice device : devices) {
             DevicePingNote note = pollService.pollDevice(device);
             System.out.println(note.toString());
             cacheService.cache(note);
-
         }
     }
 

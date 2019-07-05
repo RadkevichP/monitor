@@ -1,7 +1,6 @@
 package com.ceyeclon.monitoringapp.service;
 
 import java.util.List;
-import java.util.Set;
 
 public interface CacheService<T, V> {
 
@@ -11,5 +10,5 @@ public interface CacheService<T, V> {
 
     List<V> fetchNLastEntries(T t, int lastEntriesNumber);
 
-    Set<T> getDevices();
+    List<T> getDevices();
 }
