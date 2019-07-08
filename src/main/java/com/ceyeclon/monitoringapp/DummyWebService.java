@@ -28,9 +28,9 @@ public class DummyWebService extends HttpServlet {
         for (String device : devices) {
             List<DevicePingNote> notes = cacheService.fetchNLastEntries(device, 5);
             response += Arrays.toString(notes.toArray());
-            response += " /n";
+            response += " \n";
         }
-        resp.getWriter().println("Hi form poller!" + response);
+        resp.getWriter().println(response);
     }
 
 
