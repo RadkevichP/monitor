@@ -38,7 +38,8 @@ public class CeyeclonMonitor implements Monitor {
     private CacheService<String, DevicePingNote> cacheService;
     private PollService pollService;
     private InvestigationService investigationService;
-    private ExecutorService executorService;
+    private ExecutorService normalPollingExecutor;
+    private ExecutorService investigationPollingExecutor;
 
     public CeyeclonMonitor() {
     }
@@ -53,7 +54,8 @@ public class CeyeclonMonitor implements Monitor {
 
     @PostConstruct
     public void initialize() {
-        executorService = Executors.newFixedThreadPool(3, threadFactory);
+        normalPollingExecutor = Executors.newFixedThreadPool(3, threadFactory);
+        investigationPollingExecutor = Executors.newFixedThreadPool(1, threadFactory);
         System.out.println("Monitor created!");
         scheduler.scheduleAtFixedRate(this::monitorDevices, INITIAL_DELAY, PERIOD, TimeUnit.MINUTES);
         scheduler.scheduleAtFixedRate(this::investigateOfflineDevices, INVESTIGATION_INITIAL_DELAY,
@@ -66,10 +68,14 @@ public class CeyeclonMonitor implements Monitor {
         List<ToDevice> pingableDevices = pollService.findPingableDevices();
         List<Future<DevicePingNote>> futures;
         try {
-            futures = executorService.invokeAll(createPollingTasks(pingableDevices));
-            for (Future<DevicePingNote> note : futures) {
-                System.out.println(note.get().toString());
-                cacheService.cache(note.get());
+            futures = normalPollingExecutor.invokeAll(createPollingTasks(pingableDevices));
+            for (Future<DevicePingNote> pingNoteFuture : futures) {
+                System.out.println(pingNoteFuture.get().toString());
+                DevicePingNote note = pingNoteFuture.get();
+                if (!note.isOnline()) {
+                    investigationService.addToInvestigation(note.getIp());
+                }
+                cacheService.cache(note);
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -78,10 +84,22 @@ public class CeyeclonMonitor implements Monitor {
     }
 
     public void investigateOfflineDevices() {
-        Set<String> offlineDevices = investigationService.getDevicesUnderInvestigation();
-        if (!offlineDevices.isEmpty()) {
-            for (String)
-        } else return;
+        investigationPollingExecutor.submit(() -> {
+            System.out.println("Started investigation!");
+            Set<String> offlineDeviceIps = investigationService.getDevicesUnderInvestigation();
+            if (!offlineDeviceIps.isEmpty()) {
+                System.out.println("Some device was offline");
+                for (String offlineDeviceIp : offlineDeviceIps) {
+                    ToDevice device = new ToDevice();
+                    device.setIp(offlineDeviceIp);
+                    DevicePingNote note = pollService.pollDevice(device);
+                    if (note.isOnline()) {
+                        investigationService.deleteFromInvestigation(note.getIp());
+                    }
+                    cacheService.cache(note);
+                }
+            } else return;
+        });
     }
 
     private List<Callable<DevicePingNote>> createPollingTasks(List<ToDevice> devices) {

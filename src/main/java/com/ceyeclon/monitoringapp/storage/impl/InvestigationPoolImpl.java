@@ -12,32 +12,30 @@ import java.util.stream.Collectors;
 @Singleton
 public class InvestigationPoolImpl implements InvestigationPool {
 
-    private Map<String, ToDevice> devicesUnderInvestigation = new HashMap<>();
+    private Set<String> ipsUnderInvestigation = new HashSet<>();
 
     @Override
     @Lock(LockType.WRITE)
-    public void adToPool(ToDevice device) {
-        devicesUnderInvestigation.put(device.getIp(), device);
+    public void adToPool(String ip) {
+        ipsUnderInvestigation.add(ip);
     }
 
     @Override
     @Lock(LockType.WRITE)
-    public void deleteFromPool(ToDevice device) {
-        devicesUnderInvestigation.remove(device.getIp());
+    public void deleteFromPool(String ip) {
+        ipsUnderInvestigation.remove(ip);
     }
 
     @Override
     @Lock(LockType.READ)
-    public boolean isInPool(ToDevice device) {
-        return devicesUnderInvestigation.containsKey(device.getIp());
+    public boolean isInPool(String ip) {
+        return ipsUnderInvestigation.contains(ip);
     }
 
     @Override
     @Lock(LockType.READ)
-    public List<ToDevice> getPooledDevices() {
-        return devicesUnderInvestigation.values()
-                .stream()
-                .collect(Collectors.toList());
+    public Set<String> getPooledDevicesIps() {
+        return ipsUnderInvestigation;
     }
 
 }

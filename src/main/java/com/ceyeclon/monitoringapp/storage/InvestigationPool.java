@@ -3,14 +3,15 @@ package com.ceyeclon.monitoringapp.storage;
 import generated.ToDevice;
 
 import java.util.List;
+import java.util.Set;
 
 public interface InvestigationPool {
 
-    void adToPool(ToDevice device);
+    void adToPool(String ip);
 
-    void deleteFromPool(ToDevice device);
+    void deleteFromPool(String ip);
 
-    boolean isInPool(ToDevice device);
+    boolean isInPool(String ip);
 
-    List<ToDevice> getPooledDevices();
+    Set<String> getPooledDevicesIps();
 }

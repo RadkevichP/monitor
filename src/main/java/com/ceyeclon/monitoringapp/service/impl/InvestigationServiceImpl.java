@@ -7,6 +7,7 @@ import generated.ToDevice;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
 
 @Stateless
 public class InvestigationServiceImpl implements InvestigationService {
@@ -23,22 +24,22 @@ public class InvestigationServiceImpl implements InvestigationService {
     }
 
     @Override
-    public void addToInvestigation(ToDevice device) {
-        investigationPool.adToPool(device);
+    public void addToInvestigation(String ip) {
+        investigationPool.adToPool(ip);
     }
 
     @Override
-    public void deleteFromInvestigation(ToDevice device) {
-        investigationPool.deleteFromPool(device);
+    public void deleteFromInvestigation(String ip) {
+        investigationPool.deleteFromPool(ip);
     }
 
     @Override
     public boolean isUnderInvestigation(ToDevice device) {
-        return investigationPool.isInPool(device);
+        return investigationPool.isInPool(device.getIp());
     }
 
     @Override
-    public List<ToDevice> getDevicesUnderInvestigation() {
-        return investigationPool.getPooledDevices();
+    public Set<String> getDevicesUnderInvestigation() {
+        return investigationPool.getPooledDevicesIps();
     }
 }

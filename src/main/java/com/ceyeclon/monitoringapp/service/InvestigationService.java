@@ -2,17 +2,16 @@ package com.ceyeclon.monitoringapp.service;
 
 import generated.ToDevice;
 
-import java.util.List;
 import java.util.Set;
 
 public interface InvestigationService {
 
-    void addToInvestigation(ToDevice device);
+    void addToInvestigation(String ip);
 
-    void deleteFromInvestigation(ToDevice device);
+    void deleteFromInvestigation(String ip);
 
     boolean isUnderInvestigation(ToDevice device);
 
-    List<ToDevice> getDevicesUnderInvestigation();
+    Set<String> getDevicesUnderInvestigation();
 
 }
