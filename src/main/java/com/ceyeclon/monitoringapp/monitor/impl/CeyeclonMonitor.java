@@ -45,6 +45,7 @@ public class CeyeclonMonitor implements Monitor {
     private ExecutorService investigationPollingExecutor;
     private ExecutorService archiveExecutor;
 
+
     public CeyeclonMonitor() {
     }
 
@@ -95,7 +96,7 @@ public class CeyeclonMonitor implements Monitor {
     @Override
     public void investigateOfflineDevices() {
         investigationPollingExecutor.submit(() -> {
-            System.out.println("Started investigation!");
+            System.out.println("Investigation started!");
             Set<String> offlineDeviceIps = investigationService.getDevicesUnderInvestigation();
             if (!offlineDeviceIps.isEmpty()) {
                 System.out.println("Some devices were offline");
@@ -125,6 +126,5 @@ public class CeyeclonMonitor implements Monitor {
         }
         return pollingTasks;
     }
-
 
 }
