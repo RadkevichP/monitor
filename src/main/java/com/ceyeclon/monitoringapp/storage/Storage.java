@@ -13,4 +13,6 @@ public interface Storage<T, V> {
 
     Set<T> getStoredKeys();
 
+    void archiveOlderThan(long minutes);
+
 }

@@ -7,7 +7,6 @@ import com.ceyeclon.monitoringapp.storage.Storage;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Stateless
@@ -29,11 +28,6 @@ public class InMemoryCacheService implements CacheService<String, DevicePingNote
     }
 
     @Override
-    public void clearOutdatedData(long periodToLeave) {
-        //TODO: implement bl
-    }
-
-    @Override
     public List<DevicePingNote> fetchNLastEntries(String ip, int lastEntriesNumber) {
         return storage.fetchNLastEntries(ip, lastEntriesNumber);
     }
@@ -44,5 +38,10 @@ public class InMemoryCacheService implements CacheService<String, DevicePingNote
                 .stream()
                 .collect(Collectors.toList());
         return keys;
+    }
+
+    @Override
+    public void archiveNotesOlderThan(long archiveTimeMinutes) {
+        storage.archiveOlderThan(archiveTimeMinutes);
     }
 }

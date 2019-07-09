@@ -4,9 +4,8 @@ import com.ceyeclon.monitoringapp.model.DevicePingNote;
 import com.ceyeclon.monitoringapp.storage.Storage;
 
 import javax.ejb.*;
+import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 @Singleton
@@ -39,7 +38,6 @@ public class InMemoryStorage implements Storage<String, DevicePingNote> {
     @Override
     @Lock(LockType.READ)
     public List<DevicePingNote> fetchNLastEntries(String deviceIp, int lastEntriesNumber) {
-
         if (storage.containsKey(deviceIp)) {
             List<DevicePingNote> notes = storage.get(deviceIp);
             int notesNumber = notes.size();
@@ -56,5 +54,20 @@ public class InMemoryStorage implements Storage<String, DevicePingNote> {
     @Lock(LockType.READ)
     public Set<String> getStoredKeys() {
         return storage.keySet();
+    }
+
+    @Override
+    @Lock(LockType.WRITE)
+    public void archiveOlderThan(long minutes) {
+        for (Map.Entry<String, List<DevicePingNote>> storageEntry : storage.entrySet()) {
+            List<DevicePingNote> actualNotes = storageEntry.getValue()
+                    .stream()
+                    .filter(note -> (note.getTimeStampSeconds() > (Instant.now().getEpochSecond() - (minutes * 60))))
+                    .collect(Collectors.toList());
+            if (!actualNotes.isEmpty()) {
+                storageEntry.setValue(actualNotes);
+                System.out.println("Notes actualized!");
+            } else storage.remove(storageEntry.getKey());
+        }
     }
 }

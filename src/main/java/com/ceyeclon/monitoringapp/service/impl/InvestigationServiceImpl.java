@@ -6,7 +6,6 @@ import generated.ToDevice;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.List;
 import java.util.Set;
 
 @Stateless

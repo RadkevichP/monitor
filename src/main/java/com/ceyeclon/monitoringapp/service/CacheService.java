@@ -6,9 +6,9 @@ public interface CacheService<T, V> {
 
     void cache(V v);
 
-    void clearOutdatedData(long periodToLeave);
-
     List<V> fetchNLastEntries(T t, int lastEntriesNumber);
 
     List<T> getDevices();
+
+    void archiveNotesOlderThan(long archiveTimeMinutes);
 }
