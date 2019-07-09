@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+    <title>My Facelet Page Title</title>
+    <h:outputStylesheet library="css" name="table-style.css"  />
+</h:head>
+<h:body>
+    Hello from Facelets: #{dummy.contract}
+    <table class="order-table">
+        <tr>
+            <th class="order-table-header">Device IP</th>
+            <th class="order-table-header">Status</th>
+            <th class="order-table-header">Status</th>
+            <th class="order-table-header">Status</th>
+            <th class="order-table-header">Status</th>
+            <th class="order-table-header">Status</th>
+        </tr>
+        <tbody>
+        <ui:repeat var="o" value="#{dummy.allDevices}" varStatus="status">
+            <h:panelGroup rendered="#{status.even}">
+                <tr>
+                    <td class="order-table-even-row">#{o}</td>
+                    <td class="order-table-even-row">no data</td>
+                    <td class="order-table-even-row">no data</td>
+                    <td class="order-table-even-row">no data</td>
+                    <td class="order-table-even-row">no data</td>
+                    <td class="order-table-even-row">no data</td>
+                </tr>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{status.odd}">
+                <tr>
+                    <td class="order-table-odd-row">#{o}</td>
+                    <td class="order-table-odd-row">no data</td>
+                    <td class="order-table-odd-row">no data</td>
+                    <td class="order-table-odd-row">no data</td>
+                    <td class="order-table-odd-row">no data</td>
+                    <td class="order-table-odd-row">no data</td>
+                </tr>
+            </h:panelGroup>
+        </ui:repeat>
+        </tbody>
+    </table>
+</h:body>
+</html>
