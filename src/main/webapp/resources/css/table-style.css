@@ -2,6 +2,19 @@
     border-collapse: collapse;
 }
 
+
+.ONLINE {
+    background: #62ff50;
+}
+
+.OFFLINE {
+    background: #ff4000;
+}
+
+.UNDER_INVESTIGATION {
+    background: #ffff66;
+}
+
 .order-table-header {
     text-align: center;
     background: none repeat scroll 0 0 #E5E5E5;
@@ -11,12 +24,10 @@
 
 .order-table-odd-row {
     text-align: center;
-    background: none repeat scroll 0 0 #FFFFFF;
     border-top: 1px solid #BBBBBB;
 }
 
 .order-table-even-row {
     text-align: center;
-    background: none repeat scroll 0 0 #F9F9F9;
     border-top: 1px solid #BBBBBB;
 }

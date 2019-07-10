@@ -1,7 +1,6 @@
 package com.ceyeclon.monitoringapp.presentation;
 
-import com.ceyeclon.monitoringapp.model.DevicePingNote;
-import com.ceyeclon.monitoringapp.service.CacheService;
+import com.ceyeclon.monitoringapp.presentation.model.DeviceView;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -15,18 +14,15 @@ public class DummyBean implements Serializable {
 
 
     @Inject
-    CacheService<String, DevicePingNote> cacheService;
+    ViewService viewService;
 
     String contract = "Pavel Radkevich";
 
-    List<String> allDevices;
+    List<DeviceView> allDeviceViews;
 
-    public List<String> getAllDevices() {
-        return cacheService.getDevices();
-    }
-
-    public void setAllDevices(List<String> allDevices) {
-        this.allDevices = allDevices;
+    public List<DeviceView> getAllDeviceViews() {
+        allDeviceViews = viewService.getDeviceViews();
+        return allDeviceViews;
     }
 
     public String getContract() {

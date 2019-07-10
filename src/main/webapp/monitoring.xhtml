@@ -6,40 +6,40 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:head>
-    <title>My Facelet Page Title</title>
-    <h:outputStylesheet library="css" name="table-style.css"  />
+    <title>Ceyeclon Monitoring Application</title>
+    <h:outputStylesheet library="css" name="table-style.css"/>
 </h:head>
 <h:body>
     Hello from Facelets: #{dummy.contract}
     <table class="order-table">
         <tr>
             <th class="order-table-header">Device IP</th>
-            <th class="order-table-header">Status</th>
-            <th class="order-table-header">Status</th>
-            <th class="order-table-header">Status</th>
-            <th class="order-table-header">Status</th>
-            <th class="order-table-header">Status</th>
+            <th class="order-table-header">Status 1</th>
+            <th class="order-table-header">Status 2</th>
+            <th class="order-table-header">Status 3</th>
+            <th class="order-table-header">Status 4</th>
+            <th class="order-table-header">Status 5</th>
         </tr>
         <tbody>
-        <ui:repeat var="o" value="#{dummy.allDevices}" varStatus="status">
+        <ui:repeat var="o" value="#{dummy.allDeviceViews}" varStatus="status">
             <h:panelGroup rendered="#{status.even}">
-                <tr>
-                    <td class="order-table-even-row">#{o}</td>
-                    <td class="order-table-even-row">no data</td>
-                    <td class="order-table-even-row">no data</td>
-                    <td class="order-table-even-row">no data</td>
-                    <td class="order-table-even-row">no data</td>
-                    <td class="order-table-even-row">no data</td>
+                <tr class="#{o.deviceState}">
+                    <td class="order-table-even-row #{o.deviceState}">#{o.ip}</td>
+                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(0)}</td>
+                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(1)}</td>
+                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(2)}</td>
+                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(3)}</td>
+                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(4)}</td>
                 </tr>
             </h:panelGroup>
             <h:panelGroup rendered="#{status.odd}">
-                <tr>
-                    <td class="order-table-odd-row">#{o}</td>
-                    <td class="order-table-odd-row">no data</td>
-                    <td class="order-table-odd-row">no data</td>
-                    <td class="order-table-odd-row">no data</td>
-                    <td class="order-table-odd-row">no data</td>
-                    <td class="order-table-odd-row">no data</td>
+                <tr class="#{o.deviceState}">
+                    <td class="order-table-odd-row #{o.deviceState}">#{o.ip}</td>
+                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(0)}</td>
+                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(1)}</td>
+                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(2)}</td>
+                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(3)}</td>
+                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(4)}</td>
                 </tr>
             </h:panelGroup>
         </ui:repeat>
