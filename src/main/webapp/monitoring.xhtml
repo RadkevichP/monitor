@@ -21,7 +21,7 @@
             <th class="order-table-header">Status 5</th>
         </tr>
         <tbody>
-        <ui:repeat var="o" value="#{dummy.allDeviceViews}" varStatus="status">
+        <ui:repeat var="o" value="#{monitoring.allDeviceViews}" varStatus="status">
             <h:panelGroup rendered="#{status.even}">
                 <tr class="#{o.deviceState}">
                     <td class="order-table-even-row #{o.deviceState}">#{o.ip}</td>
