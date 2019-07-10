@@ -1,4 +1,4 @@
-package com.ceyeclon.monitoringapp.jsfbeans;
+package com.ceyeclon.monitoringapp.presentation;
 
 import com.ceyeclon.monitoringapp.model.DevicePingNote;
 import com.ceyeclon.monitoringapp.service.CacheService;
