@@ -1,9 +1,10 @@
-package com.ceyeclon.monitoringapp.presentation;
+package com.ceyeclon.monitoringapp.presentation.service.impl;
 
 import com.ceyeclon.monitoringapp.model.DevicePingNote;
 import com.ceyeclon.monitoringapp.presentation.model.DeviceState;
 import com.ceyeclon.monitoringapp.presentation.model.DeviceStatus;
 import com.ceyeclon.monitoringapp.presentation.model.DeviceView;
+import com.ceyeclon.monitoringapp.presentation.service.ViewService;
 import com.ceyeclon.monitoringapp.service.CacheService;
 
 import javax.enterprise.context.ApplicationScoped;

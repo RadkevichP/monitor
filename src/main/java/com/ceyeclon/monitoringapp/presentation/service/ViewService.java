@@ -1,4 +1,4 @@
-package com.ceyeclon.monitoringapp.presentation;
+package com.ceyeclon.monitoringapp.presentation.service;
 
 import com.ceyeclon.monitoringapp.presentation.model.DeviceView;
 

@@ -1,20 +1,19 @@
-package com.ceyeclon.monitoringapp.presentation;
+package com.ceyeclon.monitoringapp.presentation.managedBeans;
 
 import com.ceyeclon.monitoringapp.presentation.model.DeviceView;
+import com.ceyeclon.monitoringapp.presentation.service.ViewService;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 
-@Named("dummy")
+@Named("monitoring")
 @RequestScoped
-public class DummyBean implements Serializable {
-
+public class MonitoringBean {
 
     @Inject
-    ViewService viewService;
+    private ViewService viewService;
 
     String contract = "Pavel Radkevich";
 
