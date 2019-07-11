@@ -1,5 +1,6 @@
-package com.ceyeclon.monitoringapp.presentation.model;
+package com.ceyeclon.presentation.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ public class DeviceView {
 
     private String ip;
     private List<DeviceStatus> deviceStatuses = new ArrayList<>();
+    private LocalDateTime lastPolled;
     private DeviceState deviceState;
 
     public DeviceView(String ip) {
@@ -26,6 +28,14 @@ public class DeviceView {
 
     public void setDeviceState(DeviceState deviceState) {
         this.deviceState = deviceState;
+    }
+
+    public LocalDateTime getLastPolled() {
+        return lastPolled;
+    }
+
+    public void setLastPolled(LocalDateTime lastPolled) {
+        this.lastPolled = lastPolled;
     }
 
     public void setStatus(int statusPosition, DeviceStatus status) {

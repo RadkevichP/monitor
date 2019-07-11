@@ -6,8 +6,8 @@ import com.ceyeclon.monitoringapp.storage.Storage;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Stateless
 public class InMemoryCacheService implements CacheService<String, DevicePingNote> {
@@ -34,10 +34,7 @@ public class InMemoryCacheService implements CacheService<String, DevicePingNote
 
     @Override
     public List<String> getDevices() {
-        List<String> keys = storage.getStoredKeys()
-                .stream()
-                .collect(Collectors.toList());
-        return keys;
+        return new ArrayList<>(storage.getStoredKeys());
     }
 
     @Override

@@ -1,15 +1,15 @@
-package com.ceyeclon.monitoringapp.presentation.managedBeans;
+package com.ceyeclon.presentation.managedBeans;
 
-import com.ceyeclon.monitoringapp.presentation.model.DeviceView;
-import com.ceyeclon.monitoringapp.presentation.service.ViewService;
+import com.ceyeclon.presentation.model.DeviceView;
+import com.ceyeclon.presentation.service.ViewService;
 
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 @Named("monitoring")
-@RequestScoped
+@ApplicationScoped
 public class MonitoringBean {
 
     @Inject

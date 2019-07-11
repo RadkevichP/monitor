@@ -1,4 +1,4 @@
-package com.ceyeclon.monitoringapp.presentation.model;
+package com.ceyeclon.presentation.model;
 
 public enum DeviceStatus {
 

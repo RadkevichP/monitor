@@ -20,6 +20,7 @@
             <th class="order-table-header">Status 3</th>
             <th class="order-table-header">Status 4</th>
             <th class="order-table-header">Status 5</th>
+            <th class="order-table-header">Updated</th>
         </tr>
         <tbody>
         <ui:repeat var="o" value="#{monitoring.allDeviceViews}" varStatus="status">
@@ -31,6 +32,7 @@
                     <td class="order-table-even-row">#{o.getStatus(2)}</td>
                     <td class="order-table-even-row">#{o.getStatus(3)}</td>
                     <td class="order-table-even-row">#{o.getStatus(4)}</td>
+                    <td class="order-table-even-row">#{o.lastPolled}</td>
                 </tr>
             </h:panelGroup>
         </ui:repeat>
