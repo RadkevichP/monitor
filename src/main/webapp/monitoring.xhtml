@@ -7,10 +7,11 @@
 >
 <h:head>
     <title>Ceyeclon Monitoring Application</title>
+    <meta http-equiv="refresh" content="15"/>
     <h:outputStylesheet library="css" name="table-style.css"/>
+    <h:outputScript library="js" name="alert-script.js"/>
 </h:head>
-<h:body>
-    Hello from Facelets: #{monitoring.contract}
+<h:body onload="alerting()">
     <table class="order-table">
         <tr>
             <th class="order-table-header">Device IP</th>
@@ -22,24 +23,14 @@
         </tr>
         <tbody>
         <ui:repeat var="o" value="#{monitoring.allDeviceViews}" varStatus="status">
-            <h:panelGroup rendered="#{status.even}">
-                <tr class="#{o.deviceState}">
-                    <td class="order-table-even-row #{o.deviceState}">#{o.ip}</td>
-                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(0)}</td>
-                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(1)}</td>
-                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(2)}</td>
-                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(3)}</td>
-                    <td class="order-table-even-row #{o.deviceState}">#{o.getStatus(4)}</td>
-                </tr>
-            </h:panelGroup>
-            <h:panelGroup rendered="#{status.odd}">
-                <tr class="#{o.deviceState}">
-                    <td class="order-table-odd-row #{o.deviceState}">#{o.ip}</td>
-                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(0)}</td>
-                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(1)}</td>
-                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(2)}</td>
-                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(3)}</td>
-                    <td class="order-table-odd-row #{o.deviceState}">#{o.getStatus(4)}</td>
+            <h:panelGroup rendered="true">
+                <tr class="#{o.deviceState}" id="#{o.ip}">
+                    <td class="order-table-even-row">#{o.ip}</td>
+                    <td class="order-table-even-row">#{o.getStatus(0)}</td>
+                    <td class="order-table-even-row">#{o.getStatus(1)}</td>
+                    <td class="order-table-even-row">#{o.getStatus(2)}</td>
+                    <td class="order-table-even-row">#{o.getStatus(3)}</td>
+                    <td class="order-table-even-row">#{o.getStatus(4)}</td>
                 </tr>
             </h:panelGroup>
         </ui:repeat>

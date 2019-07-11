@@ -107,6 +107,7 @@ public class CeyeclonMonitor implements Monitor {
                     if (note.isOnline()) {
                         investigationService.deleteFromInvestigation(note.getIp());
                     }
+                    System.out.println(note.toString());
                     cacheService.cache(note);
                 }
             } else return;

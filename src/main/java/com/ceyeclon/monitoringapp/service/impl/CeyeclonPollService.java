@@ -23,7 +23,7 @@ public class CeyeclonPollService implements PollService {
 
     //TODO: take this value from property file
     private final String apiKey = "lnzihhej8h80zu9q75n6lt7bw1ed6qefcrwdystscanez0ifz3zjygzvionupdromrk07n2k2znvd484vi2qwd8vp9bnazq1p75h1iqg7tp509xjvjih6wp2dh64rcb2vebnrehvzk3ekgmkf2h3l5";
-    private final int gateway = 1;
+    private final int gateway = 0;
 
     public CeyeclonPollService() {
     }
@@ -49,7 +49,7 @@ public class CeyeclonPollService implements PollService {
         List<ToDevice> pingableDevices = mlzStateAPI.getDeviceList(apiKey)
                 .stream()
                 .filter(device -> (device.getIp() != null))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()).subList(0, 1);
         return pingableDevices;
     }
 }

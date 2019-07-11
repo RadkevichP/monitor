@@ -29,7 +29,7 @@ public class DeviceView {
     }
 
     public void setStatus(int statusPosition, DeviceStatus status) {
-        deviceStatuses.add(statusPosition, status);
+        deviceStatuses.set(statusPosition, status);
     }
 
     public String getStatus(int statusPosition) {
@@ -38,5 +38,14 @@ public class DeviceView {
 
     public List<DeviceStatus> getDeviceStatuses() {
         return deviceStatuses;
+    }
+
+    @Override
+    public String toString() {
+        return "DeviceView{" +
+                "ip='" + ip + '\'' +
+                ", deviceStatuses=" + deviceStatuses +
+                ", deviceState=" + deviceState +
+                '}';
     }
 }

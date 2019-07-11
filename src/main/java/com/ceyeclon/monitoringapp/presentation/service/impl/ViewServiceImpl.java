@@ -45,14 +45,15 @@ public class ViewServiceImpl implements ViewService {
             if (!deviceStatuses.contains(DeviceStatus.NO_DATA) && !deviceStatuses.contains(DeviceStatus.ONLINE)) {
                 deviceView.setDeviceState(DeviceState.OFFLINE);
             } else {
-                if ((deviceStatuses.contains(DeviceStatus.NO_DATA) && !deviceStatuses.contains(DeviceStatus.ONLINE))) {
+                if (deviceStatuses.get(0).equals(DeviceStatus.OFFLINE)) {
                     deviceView.setDeviceState(DeviceState.UNDER_INVESTIGATION);
                 } else {
                     deviceView.setDeviceState(DeviceState.ONLINE);
                 }
+            }
+            System.out.println(deviceView.toString());
+            deviceViews.add(deviceView);
         }
-        deviceViews.add(deviceView);
-    }
         return deviceViews;
-}
+    }
 }
