@@ -24,9 +24,9 @@ import java.util.concurrent.*;
 public class CeyeclonMonitor implements Monitor {
 
     //TODO: take these values from property file
-    private static final long POLLING_INITIAL_DELAY = 1;
+    private static final long POLLING_INITIAL_DELAY = 0;
     private static final long POLLING_INTERVAL = 3;
-    private static final long INVESTIGATION_INITIAL_DELAY = 3;
+    private static final long INVESTIGATION_INITIAL_DELAY = 2;
     private static final long INVESTIGATION_INTERVAL = 1;
     private static final long ARCHIVE_TIME_MINUTES = 100;
     private static final long ARCHIVE_INTERVAL = 15;
